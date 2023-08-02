@@ -22,7 +22,7 @@ function App() {
         const cities = values.city.split(",").map((city) => city.trim());
         const weatherDataPromises = cities.map((city) =>
           axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${"6780e0a8b4a75179564a2e859a5676a5"}&units=metric`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
           )
         );
 
@@ -43,7 +43,7 @@ function App() {
 
   const fetchCurrentCity = async (lat, lon) => {
     try {
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${"6780e0a8b4a75179564a2e859a5676a5"}&units=metric`)
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
       setWeather(response.data);
     }
     catch (err) {
