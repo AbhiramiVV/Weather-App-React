@@ -20,6 +20,7 @@ function App() {
     onSubmit: async (values) => {
       try {
         const cities = values.city.split(",").map((city) => city.trim());
+        console.log(process.env.REACT_APP_API_KEY);
         const weatherDataPromises = cities.map((city) =>
           axios.get(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
@@ -43,7 +44,6 @@ function App() {
 
   const fetchCurrentCity = async (lat, lon) => {
     try {
-      
       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
       setWeather(response.data);
     }
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <>
-      <div className=" bg-center bg-no-repeat bg-cover h-screen" style={{ backgroundImage: "url('./bgImage.jpg')" }}>
+      <div className=" bg-center bg-no-repeat bg-cover h-screen" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1562155618-e1a8bc2eb04f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1191&q=80')" }}>
         <div className='flex flex-col items-center'>
           <h1 className='py-4 text-4xl text-white font-sans font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>Search Weather</h1>
           <form onSubmit={formik.handleSubmit}>
